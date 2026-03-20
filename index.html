@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Ronald Isiko — Creative Director</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap"/>
+<style>
+/* ─── TOKENS ─────────────────────────────── */
+:root {
+  --parch:   #F4EDD8;
+  --parch2:  #EDE3C5;
+  --parch3:  #E4D8B0;
+  --forest:  #152B20;
+  --forest2: #1E4030;
+  --terra:   #C4481A;
+  --terra2:  #A33C14;
+  --gold:    #C8881A;
+  --gold2:   #9E6A10;
+  --ink:     #1A1710;
+  --ink2:    #2E2B22;
+  --muted:   #7A7260;
+  --light:   #B5AA90;
+  --cream:   #FAF6EC;
+
+  --disp: 'Abril Fatface', Georgia, serif;
+  --body: 'DM Sans', sans-serif;
+  --mono: 'Courier Prime', monospace;
+}
+
+/* ─── RESET ──────────────────────────────── */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; font-size:18px; }
+body {
+  background: var(--parch);
+  color: var(--ink);
+  font-family: var(--body);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* grain texture */
+body::after {
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.04;
+  mix-blend-mode: multiply;
+}
+
+/* ─── CURSOR ─────────────────────────────── */
+#cur { position:fixed; top:0; left:0; z-index:9999; pointer-events:none; }
+.cd {
+  position:absolute; width:8px; height:8px;
+  background:var(--terra); border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+.cr {
+  position:absolute; width:36px; height:36px;
+  border:1.5px solid rgba(196,72,26,.4); border-radius:50%;
+  transform:translate(-50%,-50%);
+  transition:width .3s,height .3s,border-color .3s;
+}
+body:has(a:hover) .cr { width:52px; height:52px; border-color:var(--terra); }
+
+/* ─── NAV ────────────────────────────────── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:500;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.4rem 3rem;
+  transition:background .4s, border-color .4s;
+  border-bottom: 1px solid transparent;
+}
+nav.on {
+  background: rgba(244,237,216,.92);
+  backdrop-filter: blur(16px);
+  border-color: var(--parch3);
+}
+.nlogo {
+  font-family:var(--disp);
+  font-size:1.5rem; color:var(--forest);
+  text-decoration:none; letter-spacing:-.01em;
+}
+.nlogo sup { font-family:var(--mono); font-size:.55rem; color:var(--terra); letter-spacing:.1em; vertical-align:super; }
+.nlinks { display:flex; gap:2rem; list-style:none; }
+.nlinks a {
+  font-family:var(--mono); font-size:.72rem;
+  font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--muted); text-decoration:none;
+  transition:color .2s;
+}
+.nlinks a:hover { color:var(--forest); }
+.ncta {
+  font-family:var(--mono); font-size:.68rem;
+  font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--cream); background:var(--forest);
+  padding:.7rem 1.6rem; text-decoration:none;
+  border:2px solid var(--forest);
+  transition:all .2s;
+}
+.ncta:hover { background:transparent; color:var(--forest); }
+
+/* ─── HERO ────────────────────────────────── */
+#hero {
+  min-height:100vh;
+  background:var(--forest);
+  position:relative; overflow:hidden;
+  display:flex; flex-direction:column;
+  justify-content:flex-end;
+  padding:0 3rem 5rem;
+}
+
+/* big background number */
+.hero-num {
+  position:absolute; top:50%; right:-2rem;
+  transform:translateY(-55%);
+  font-family:var(--disp);
+  font-size: clamp(22rem, 38vw, 46rem);
+  line-height:1;
+  color:transparent;
+  -webkit-text-stroke: 1px rgba(244,237,216,.07);
+  user-select:none; pointer-events:none;
+  letter-spacing:-.04em;
+}
+
+/* diagonal accent bar */
+.hero-bar {
+  position:absolute; top:0; right:5rem;
+  width:3px; height:100%;
+  background:linear-gradient(to bottom, var(--terra), transparent);
+  opacity:.5;
+}
+
+.hero-tag {
+  font-family:var(--mono); font-size:.68rem;
+  letter-spacing:.22em; text-transform:uppercase;
+  color:var(--gold);
+  display:flex; align-items:center; gap:.75rem;
+  margin-bottom:2rem; position:relative; z-index:2;
+}
+.hero-tag::before { content:''; width:3rem; height:1px; background:var(--gold); }
+
+.hero-name {
+  font-family:var(--disp);
+  font-size: clamp(5rem, 11vw, 14rem);
+  line-height:.88; letter-spacing:-.02em;
+  color:var(--parch);
+  position:relative; z-index:2;
+}
+.hero-name .line2 { color:var(--terra); display:block; }
+
+.hero-bottom {
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  gap:2rem; margin-top:4rem;
+  padding-top:2.5rem;
+  border-top:1px solid rgba(244,237,216,.12);
+  position:relative; z-index:2;
+}
+.hb-item {}
+.hb-label {
+  font-family:var(--mono); font-size:.6rem;
+  letter-spacing:.2em; text-transform:uppercase;
+  color:rgba(244,237,216,.35); margin-bottom:.5rem;
+}
+.hb-val {
+  font-family:var(--body); font-size:1.05rem;
+  font-weight:500; color:var(--parch);
+  line-height:1.4;
+}
+
+.hero-scroll {
+  position:absolute; right:3rem; bottom:5rem;
+  writing-mode:vertical-rl;
+  font-family:var(--mono); font-size:.6rem;
+  letter-spacing:.2em; text-transform:uppercase;
+  color:rgba(244,237,216,.3); text-decoration:none;
+  display:flex; align-items:center; gap:.75rem;
+  animation:fadeUp 1s 1s both;
+}
+.hero-scroll::after {
+  content:''; width:1px; height:60px;
+  background:linear-gradient(rgba(244,237,216,.3),transparent);
+  animation:scrollLine 1.8s ease-in-out infinite;
+}
+@keyframes scrollLine { 0%,100%{opacity:.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(.4)} }
+
+/* ─── MARQUEE ────────────────────────────── */
+.marquee {
+  background:var(--terra);
+  padding:1rem 0; overflow:hidden;
+  border-top:3px solid var(--terra2);
+}
+.mtrack {
+  display:flex; gap:0;
+  animation:marq 18s linear infinite;
+  white-space:nowrap;
+}
+.mi {
+  font-family:var(--disp); font-size:1.3rem;
+  color:var(--cream); padding:0 2rem;
+  display:flex; align-items:center; gap:2rem;
+  flex-shrink:0;
+}
+.mi::after { content:'◆'; font-size:.5rem; color:rgba(255,255,255,.4); }
+@keyframes marq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ─── SHARED SECTION ─────────────────────── */
+.sec { padding:7rem 3rem; }
+.sec-label {
+  font-family:var(--mono); font-size:.68rem;
+  letter-spacing:.22em; text-transform:uppercase;
+  color:var(--terra); margin-bottom:1rem;
+  display:flex; align-items:center; gap:.75rem;
+}
+.sec-label::before { content:''; width:2.5rem; height:2px; background:var(--terra); }
+.sec-h {
+  font-family:var(--disp);
+  font-size:clamp(3rem,5vw,5.5rem);
+  line-height:.95; letter-spacing:-.02em;
+  color:var(--forest);
+}
+.sec-h em { color:var(--terra); font-style:italic; }
+
+/* ─── STATS ──────────────────────────────── */
+.stats {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  background:var(--forest);
+}
+.stat {
+  padding:3.5rem 3rem;
+  border-right:1px solid rgba(244,237,216,.1);
+  position:relative; overflow:hidden;
+  transition:background .3s;
+}
+.stat:last-child { border-right:none; }
+.stat:hover { background:var(--forest2); }
+.stat::before {
+  content:''; position:absolute; bottom:0; left:0; right:0;
+  height:3px; background:var(--terra);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .45s;
+}
+.stat:hover::before { transform:scaleX(1); }
+.stat-n {
+  font-family:var(--disp);
+  font-size:5rem; color:var(--terra); line-height:1;
+  margin-bottom:.5rem;
+}
+.stat-l {
+  font-family:var(--mono); font-size:.62rem;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(244,237,216,.4);
+}
+
+/* ─── ABOUT ──────────────────────────────── */
+#about {
+  background:var(--cream);
+  border-top:4px solid var(--forest);
+}
+.about-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:6rem; align-items:start;
+}
+.about-sticky { position:sticky; top:7rem; }
+.about-big {
+  font-family:var(--disp);
+  font-size:clamp(3.5rem,5vw,5rem);
+  line-height:.95; letter-spacing:-.02em;
+  color:var(--forest);
+  margin-bottom:2.5rem;
+}
+.about-big em { color:var(--terra); }
+.about-text {
+  font-size:1.25rem; line-height:1.75;
+  color:var(--ink2); font-weight:300;
+  max-width:44ch;
+}
+.about-text strong { color:var(--forest); font-weight:600; }
+
+.skills-head {
+  font-family:var(--mono); font-size:.65rem;
+  letter-spacing:.2em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:1.25rem;
+}
+.skills-list {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:.5rem;
+}
+.sk {
+  display:flex; align-items:center; gap:.75rem;
+  font-size:1rem; font-weight:500; color:var(--ink2);
+  padding:.65rem 1rem;
+  border:1.5px solid var(--parch3);
+  background:var(--parch);
+  transition:all .2s;
+}
+.sk::before { content:''; width:6px; height:6px; background:var(--terra); border-radius:50%; flex-shrink:0; }
+.sk:hover { border-color:var(--terra); background:var(--cream); color:var(--terra); }
+.sk.featured { border-color:var(--forest); color:var(--forest); }
+.sk.featured::before { background:var(--forest); }
+.sk.featured:hover { background:var(--forest); color:var(--parch); }
+
+.certs {
+  margin-top:3rem;
+  border-top:2px solid var(--parch3);
+  padding-top:2rem;
+}
+.cert-item {
+  display:flex; align-items:center; gap:1rem;
+  padding:.9rem 0;
+  border-bottom:1px solid var(--parch3);
+  font-size:1rem; font-weight:400; color:var(--muted);
+  transition:all .2s;
+}
+.cert-item::before { content:'→'; color:var(--terra); font-weight:700; }
+.cert-item:hover { color:var(--forest); padding-left:.75rem; }
+
+/* ─── GALLERY ─────────────────────────────── */
+#gallery {
+  background:var(--parch2);
+  border-top:4px solid var(--terra);
+}
+.gal-head {
+  display:grid; grid-template-columns:3fr 2fr;
+  gap:4rem; align-items:end;
+  margin-bottom:3rem;
+}
+.gal-note {
+  font-size:1.15rem; font-weight:300;
+  color:var(--muted); line-height:1.7;
+}
+
+/* filter */
+.gal-filters {
+  display:flex; gap:.5rem; flex-wrap:wrap;
+  margin-bottom:3rem;
+}
+.gf {
+  font-family:var(--mono); font-size:.65rem;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--muted); border:1.5px solid var(--parch3);
+  padding:.55rem 1.3rem; background:transparent; cursor:pointer;
+  transition:all .2s;
+}
+.gf:hover,.gf.active {
+  background:var(--forest); color:var(--parch);
+  border-color:var(--forest);
+}
+
+/* grid */
+.gal-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:280px;
+  gap:6px;
+}
+.gi {
+  position:relative; overflow:hidden; cursor:pointer;
+  background:var(--parch3);
+}
+.gi.wide  { grid-column:span 2; }
+.gi.tall  { grid-row:span 2; }
+.gi.big   { grid-column:span 2; grid-row:span 2; }
+
+.gi img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .6s cubic-bezier(.25,.46,.45,.94), filter .4s;
+  filter:saturate(.85);
+}
+.gi:hover img { transform:scale(1.08); filter:saturate(1.1); }
+
+/* placeholder skin */
+.gi-ph {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:1rem;
+  background:var(--parch3);
+}
+.gi-ph-icon {
+  width:48px; height:48px;
+  border:2px solid var(--light);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+}
+.gi-ph-icon svg { width:22px; height:22px; stroke:var(--light); fill:none; stroke-width:1.5; }
+.gi-ph-num {
+  font-family:var(--disp); font-size:5rem;
+  color:var(--parch); line-height:1;
+  position:absolute; bottom:1rem; right:1.25rem;
+  opacity:.4;
+}
+.gi-ph-cat {
+  font-family:var(--mono); font-size:.6rem;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--light);
+}
+
+/* overlay */
+.gi-ov {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(21,43,32,.9) 0%, transparent 55%);
+  opacity:0; transition:opacity .35s;
+  display:flex; flex-direction:column;
+  justify-content:flex-end; padding:1.5rem;
+}
+.gi:hover .gi-ov { opacity:1; }
+.gi-ov-cat {
+  font-family:var(--mono); font-size:.58rem;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:var(--terra); margin-bottom:.3rem;
+}
+.gi-ov-title {
+  font-family:var(--disp); font-size:1.5rem;
+  color:var(--parch); line-height:1.1;
+}
+
+/* Lightbox */
+#lb {
+  position:fixed; inset:0; z-index:1000;
+  background:rgba(21,43,32,.97);
+  display:none; align-items:center; justify-content:center;
+  backdrop-filter:blur(12px);
+}
+#lb.open { display:flex; }
+#lb-img { max-width:88vw; max-height:88vh; object-fit:contain; }
+.lb-ph {
+  width:600px; height:450px; max-width:88vw; max-height:88vh;
+  background:var(--forest2);
+  display:flex; align-items:center; justify-content:center;
+}
+.lb-ph-txt {
+  font-family:var(--disp); font-size:8rem; color:rgba(244,237,216,.08);
+}
+#lb-x {
+  position:absolute; top:2rem; right:2rem;
+  font-family:var(--mono); font-size:.7rem;
+  letter-spacing:.15em; text-transform:uppercase;
+  color:rgba(244,237,216,.5); cursor:pointer;
+  background:none; border:1px solid rgba(244,237,216,.2);
+  padding:.5rem 1.2rem; transition:all .2s;
+}
+#lb-x:hover { color:var(--parch); border-color:var(--parch); }
+#lb-p,#lb-n {
+  position:absolute; top:50%; transform:translateY(-50%);
+  font-family:var(--disp); font-size:2rem; color:rgba(244,237,216,.4);
+  background:none; border:none; cursor:pointer; padding:1.5rem;
+  transition:color .2s;
+}
+#lb-p:hover,#lb-n:hover { color:var(--terra); }
+#lb-p { left:1rem; } #lb-n { right:1rem; }
+#lb-info {
+  position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+  font-family:var(--mono); font-size:.62rem;
+  letter-spacing:.15em; color:rgba(244,237,216,.4);
+}
+
+/* ─── EXPERIENCE ──────────────────────────── */
+#experience {
+  background:var(--forest);
+  border-top:4px solid var(--terra);
+}
+#experience .sec-label { color:var(--gold); }
+#experience .sec-label::before { background:var(--gold); }
+#experience .sec-h { color:var(--parch); }
+#experience .sec-h em { color:var(--terra); }
+
+.exp-intro-grid {
+  display:grid; grid-template-columns:1fr 2fr;
+  gap:5rem; margin-bottom:5rem; align-items:end;
+}
+.exp-sub {
+  font-size:1.15rem; font-weight:300;
+  color:rgba(244,237,216,.55); line-height:1.75;
+}
+
+.tl {}
+.tli {
+  display:grid; grid-template-columns:180px 1fr;
+  gap:3rem; padding:2.75rem 0;
+  border-bottom:1px solid rgba(244,237,216,.1);
+  position:relative; cursor:default;
+  transition:all .3s;
+}
+.tli:first-child { border-top:1px solid rgba(244,237,216,.1); }
+.tli::before {
+  content:''; position:absolute; left:0; top:0; bottom:0;
+  width:3px; background:transparent; transition:background .3s;
+}
+.tli:hover { padding-left:1.5rem; background:rgba(244,237,216,.03); }
+.tli:hover::before { background:var(--terra); }
+
+.tdate {
+  font-family:var(--mono); font-size:.65rem;
+  letter-spacing:.12em; color:var(--gold); padding-top:.35rem;
+  line-height:1.7;
+}
+.tcur {
+  display:inline-block;
+  background:rgba(196,72,26,.2); border:1px solid rgba(196,72,26,.4);
+  color:var(--terra); font-size:.52rem; letter-spacing:.15em;
+  text-transform:uppercase; padding:.2rem .55rem;
+  border-radius:2px; margin-top:.4rem;
+}
+.trole {
+  font-family:var(--disp);
+  font-size:1.9rem; color:var(--parch);
+  line-height:1.1; margin-bottom:.3rem;
+}
+.tco {
+  font-family:var(--mono); font-size:.68rem;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:rgba(196,72,26,.8); margin-bottom:.1rem;
+}
+.tco a {
+  color:inherit; text-decoration:none;
+  border-bottom:1px solid rgba(196,72,26,.3);
+  transition:border-color .2s;
+}
+.tco a:hover { border-color:var(--terra); }
+.tdesc {
+  font-size:.95rem; line-height:1.8;
+  color:rgba(244,237,216,.5); margin-top:1rem;
+}
+.ttags { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:1.1rem; }
+.ttag {
+  font-family:var(--mono); font-size:.58rem;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--terra); background:rgba(196,72,26,.1);
+  border:1px solid rgba(196,72,26,.25);
+  padding:.28rem .7rem;
+}
+
+/* ─── SERVICES ───────────────────────────── */
+#services {
+  background:var(--cream);
+  border-top:4px solid var(--forest);
+}
+.svc-intro {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:4rem; align-items:end; margin-bottom:5rem;
+}
+.svc-note {
+  font-size:1.2rem; font-weight:300;
+  color:var(--muted); line-height:1.75;
+}
+.svc-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border:2px solid var(--forest);
+}
+.svc-card {
+  padding:3rem;
+  border-right:1px solid var(--parch3);
+  border-bottom:1px solid var(--parch3);
+  transition:background .3s, transform .2s;
+  position:relative; overflow:hidden;
+}
+.svc-card:nth-child(3n)  { border-right:none; }
+.svc-card:nth-child(n+4) { border-bottom:none; }
+.svc-card::after {
+  content:''; position:absolute; inset:0;
+  background:var(--forest);
+  transform:scaleY(0); transform-origin:bottom;
+  transition:transform .4s cubic-bezier(.25,.46,.45,.94);
+  z-index:0;
+}
+.svc-card:hover::after { transform:scaleY(1); }
+.svc-card > * { position:relative; z-index:1; }
+.svc-card:hover .svc-n,
+.svc-card:hover .svc-name,
+.svc-card:hover .svc-desc { color:var(--parch); }
+.svc-card:hover .svc-ico { color:var(--terra); }
+.svc-n {
+  font-family:var(--mono); font-size:.6rem;
+  letter-spacing:.2em; color:var(--light);
+  margin-bottom:1.5rem; transition:color .3s;
+}
+.svc-ico {
+  font-size:2.2rem; margin-bottom:1.25rem;
+  display:block; transition:color .3s, transform .35s;
+  color:var(--forest);
+}
+.svc-card:hover .svc-ico { transform:scale(1.2) rotate(-8deg); }
+.svc-name {
+  font-family:var(--disp); font-size:1.5rem;
+  color:var(--forest); margin-bottom:.75rem;
+  line-height:1.1; transition:color .3s;
+}
+.svc-desc {
+  font-size:.9rem; line-height:1.75;
+  color:var(--muted); transition:color .3s;
+}
+
+/* ─── CONNECT ─────────────────────────────── */
+#connect {
+  background:var(--parch2);
+  border-top:4px solid var(--terra);
+  position:relative; overflow:hidden;
+}
+.connect-bg {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  font-family:var(--disp);
+  font-size:clamp(14rem,24vw,22rem);
+  line-height:1; letter-spacing:-.04em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(21,43,32,.06);
+  pointer-events:none; user-select:none; white-space:nowrap;
+}
+.connect-inner {
+  position:relative; z-index:2;
+  max-width:820px; margin:0 auto; text-align:center;
+}
+.connect-big {
+  font-family:var(--disp);
+  font-size:clamp(3.5rem,7vw,8rem);
+  line-height:.9; letter-spacing:-.03em;
+  color:var(--forest); margin-bottom:1.75rem;
+}
+.connect-big em { color:var(--terra); font-style:italic; display:block; }
+.connect-sub {
+  font-size:1.2rem; font-weight:300;
+  color:var(--muted); line-height:1.7;
+  margin-bottom:4rem; max-width:52ch; margin-left:auto; margin-right:auto;
+}
+.soc-row {
+  display:flex; flex-wrap:wrap; gap:.75rem;
+  justify-content:center; margin-bottom:3.5rem;
+}
+.soc {
+  display:flex; align-items:center; gap:.75rem;
+  padding:1rem 2rem;
+  border:2px solid var(--parch3);
+  font-family:var(--mono); font-size:.7rem;
+  font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); text-decoration:none;
+  transition:all .25s; background:var(--parch);
+}
+.soc:hover {
+  background:var(--forest); color:var(--parch);
+  border-color:var(--forest); transform:translateY(-3px);
+}
+.soc svg { width:15px; height:15px; fill:currentColor; }
+.contact-line {
+  font-family:var(--mono); font-size:.78rem;
+  letter-spacing:.1em; color:var(--muted);
+  display:flex; align-items:center; gap:1.5rem;
+  justify-content:center; flex-wrap:wrap;
+}
+.contact-line a { color:var(--muted); text-decoration:none; transition:color .2s; }
+.contact-line a:hover { color:var(--forest); }
+.contact-line span { color:var(--parch3); }
+
+/* ─── FOOTER ─────────────────────────────── */
+footer {
+  background:var(--forest);
+  border-top:4px solid var(--terra);
+  padding:2.25rem 3rem;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.flogo { font-family:var(--disp); font-size:1.4rem; color:var(--parch); }
+.flogo em { color:var(--terra); }
+.fcopy { font-family:var(--mono); font-size:.62rem; letter-spacing:.12em; color:rgba(244,237,216,.35); }
+.floc { font-family:var(--mono); font-size:.62rem; letter-spacing:.12em; color:rgba(244,237,216,.35); display:flex; align-items:center; gap:.5rem; }
+.floc::before { content:'◉'; color:var(--terra); }
+
+/* ─── ANIMATIONS ─────────────────────────── */
+.fu { opacity:0; transform:translateY(32px); transition:opacity .8s ease, transform .8s ease; }
+.fu.vis { opacity:1; transform:translateY(0); }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* ─── RESPONSIVE ─────────────────────────── */
+@media(max-width:1100px){
+  .stats { grid-template-columns:1fr 1fr; }
+  .stat:nth-child(2n) { border-right:none; }
+  .stat:nth-child(3),.stat:nth-child(4) { border-top:1px solid rgba(244,237,216,.1); }
+  .about-grid { grid-template-columns:1fr; }
+  .about-sticky { position:static; }
+  .gal-head { grid-template-columns:1fr; }
+  .gal-grid { grid-template-columns:repeat(2,1fr); }
+  .gi.big { grid-column:span 2; }
+  .exp-intro-grid { grid-template-columns:1fr; }
+  .svc-intro { grid-template-columns:1fr; }
+  .svc-grid { grid-template-columns:1fr 1fr; }
+  .svc-card:nth-child(3n) { border-right:1px solid var(--parch3); }
+  .svc-card:nth-child(2n) { border-right:none; }
+  .svc-card:nth-child(n+5) { border-bottom:none; }
+}
+@media(max-width:768px){
+  html { font-size:16px; }
+  nav { padding:1.2rem 1.5rem; }
+  .nlinks { display:none; }
+  #hero { padding:0 1.5rem 4rem; }
+  .hero-bottom { grid-template-columns:1fr 1fr; }
+  .sec { padding:5rem 1.5rem; }
+  .tli { grid-template-columns:1fr; gap:.5rem; }
+  .gal-grid { grid-template-columns:1fr 1fr; grid-auto-rows:200px; }
+  .gi.wide,.gi.big { grid-column:span 1; }
+  .svc-grid { grid-template-columns:1fr; }
+  .svc-card { border-right:none!important; border-bottom:1px solid var(--parch3)!important; }
+  footer { flex-direction:column; gap:1rem; text-align:center; }
+  .skills-list { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur"><div class="cd"></div><div class="cr"></div></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nlogo">ISCO<sup>portfolio</sup></a>
+  <ul class="nlinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+  <a href="mailto:iiscorockie@gmail.com" class="ncta">Hire Me</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="hero-num">RI</div>
+  <div class="hero-bar"></div>
+
+  <div class="hero-tag fu">Creative Director · Kampala, Uganda</div>
+
+  <h1 class="hero-name fu">
+    Ronald
+    <span class="line2">Isiko.</span>
+  </h1>
+
+  <div class="hero-bottom fu">
+    <div class="hb-item">
+      <div class="hb-label">Role</div>
+      <div class="hb-val">Creative Director<br>Brand Strategist · UI Designer</div>
+    </div>
+    <div class="hb-item">
+      <div class="hb-label">Currently At</div>
+      <div class="hb-val">Lubech · Navantis<br>Twyna · Wire 24</div>
+    </div>
+    <div class="hb-item">
+      <div class="hb-label">Available For</div>
+      <div class="hb-val">Remote & Hybrid<br>Global Projects</div>
+    </div>
+  </div>
+
+  <a href="#about" class="hero-scroll">Scroll</a>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="mtrack">
+    <span class="mi">Creative Direction</span>
+    <span class="mi">Brand Strategy</span>
+    <span class="mi">Photography</span>
+    <span class="mi">UI/UX Design</span>
+    <span class="mi">Digital Marketing</span>
+    <span class="mi">Web Development</span>
+    <span class="mi">Motion Graphics</span>
+    <span class="mi">Content Strategy</span>
+    <span class="mi">Creative Direction</span>
+    <span class="mi">Brand Strategy</span>
+    <span class="mi">Photography</span>
+    <span class="mi">UI/UX Design</span>
+    <span class="mi">Digital Marketing</span>
+    <span class="mi">Web Development</span>
+    <span class="mi">Motion Graphics</span>
+    <span class="mi">Content Strategy</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat fu"><div class="stat-n">5+</div><div class="stat-l">Years of Experience</div></div>
+  <div class="stat fu"><div class="stat-n">9+</div><div class="stat-l">Brands Directed</div></div>
+  <div class="stat fu"><div class="stat-n">6</div><div class="stat-l">Certifications</div></div>
+  <div class="stat fu"><div class="stat-n">19</div><div class="stat-l">Photos in Gallery</div></div>
+</div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section id="about" class="sec">
+  <div class="about-grid">
+    <div class="about-sticky fu">
+      <div class="sec-label">About Me</div>
+      <h2 class="about-big">Where<br>strategy<br>meets <em>craft.</em></h2>
+      <p class="about-text">
+        A <strong>results-driven creative</strong> with 5+ years building brands, directing campaigns, and crafting visual narratives that move people — from fintech startups to eSports companies and engineering firms. I bridge the gap between <strong>data-driven marketing</strong> and high-impact design.
+      </p>
+      <p class="about-text" style="margin-top:1.25rem">
+        Based in <strong>Ntinda, Kampala</strong>. Working globally — remote and hybrid.
+      </p>
+    </div>
+
+    <div class="fu">
+      <div class="skills-head">Skills & Expertise</div>
+      <div class="skills-list">
+        <div class="sk featured">Strategic Marketing</div>
+        <div class="sk featured">Web Development</div>
+        <div class="sk">Brand Positioning</div>
+        <div class="sk">Digital Advertising</div>
+        <div class="sk featured">UI/UX Design</div>
+        <div class="sk">Social Media Strategy</div>
+        <div class="sk featured">Photography</div>
+        <div class="sk">Graphic Design</div>
+        <div class="sk">Videography</div>
+        <div class="sk">Motion Graphics</div>
+        <div class="sk">Campaign Management</div>
+        <div class="sk">Analytics & Reporting</div>
+        <div class="sk">Adobe Creative Suite</div>
+        <div class="sk">Figma / Adobe XD</div>
+        <div class="sk">Team Leadership</div>
+        <div class="sk">Canva Pro</div>
+      </div>
+
+      <div class="certs">
+        <div class="skills-head">Certifications</div>
+        <div class="cert-item">Google Digital Marketing & E-Commerce</div>
+        <div class="cert-item">HubSpot Content Marketing</div>
+        <div class="cert-item">Social Media Advertising & Management</div>
+        <div class="cert-item">Advanced Graphic Design & Branding Masterclass</div>
+        <div class="cert-item">UI/UX Design Fundamentals — Figma & Adobe XD</div>
+        <div class="cert-item">Photography & Visual Storytelling Workshop</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<section id="gallery" class="sec" style="padding-left:0;padding-right:0">
+  <div style="padding:0 3rem">
+    <div class="gal-head fu">
+      <div>
+        <div class="sec-label">Portfolio</div>
+        <h2 class="sec-h">Visual work &<br><em>photography.</em></h2>
+      </div>
+      <p class="gal-note">Photography, brand visuals, and creative work spanning product, editorial, corporate, and lifestyle shoots across multiple industries. Replace placeholders with your shots.</p>
+    </div>
+    <div class="gal-filters fu">
+      <button class="gf active" onclick="filterGal('all',this)">All Work</button>
+      <button class="gf" onclick="filterGal('photography',this)">Photography</button>
+      <button class="gf" onclick="filterGal('branding',this)">Branding</button>
+      <button class="gf" onclick="filterGal('events',this)">Events</button>
+      <button class="gf" onclick="filterGal('lifestyle',this)">Lifestyle</button>
+    </div>
+  </div>
+
+  <div class="gal-grid fu" id="galGrid">
+
+    <!-- SLOT 01 — big feature -->
+    <div class="gi big fu" data-cat="photography" data-idx="0" onclick="openLb(0)">
+      <img src="https://picsum.photos/seed/isco01/900/900" alt="Photography 01" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Photography</div><div class="gi-ov-title">Creative Vision</div></div>
+    </div>
+
+    <!-- SLOT 02 -->
+    <div class="gi fu" data-cat="branding" data-idx="1" onclick="openLb(1)">
+      <img src="https://picsum.photos/seed/isco02/600/600" alt="Branding 02" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Branding</div><div class="gi-ov-title">Brand Identity</div></div>
+    </div>
+
+    <!-- SLOT 03 -->
+    <div class="gi fu" data-cat="lifestyle" data-idx="2" onclick="openLb(2)">
+      <img src="https://picsum.photos/seed/isco03/600/600" alt="Lifestyle 03" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Lifestyle</div><div class="gi-ov-title">Urban Moment</div></div>
+    </div>
+
+    <!-- SLOT 04 — wide -->
+    <div class="gi wide fu" data-cat="events" data-idx="3" onclick="openLb(3)">
+      <img src="https://picsum.photos/seed/isco04/1200/600" alt="Events 04" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Events</div><div class="gi-ov-title">Event Coverage</div></div>
+    </div>
+
+    <!-- SLOT 05 -->
+    <div class="gi fu" data-cat="photography" data-idx="4" onclick="openLb(4)">
+      <img src="https://picsum.photos/seed/isco05/600/600" alt="Photography 05" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Photography</div><div class="gi-ov-title">Portrait Session</div></div>
+    </div>
+
+    <!-- SLOT 06 -->
+    <div class="gi fu" data-cat="branding" data-idx="5" onclick="openLb(5)">
+      <img src="https://picsum.photos/seed/isco06/600/600" alt="Branding 06" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Branding</div><div class="gi-ov-title">Campaign Visual</div></div>
+    </div>
+
+    <!-- SLOT 07 — tall -->
+    <div class="gi tall fu" data-cat="lifestyle" data-idx="6" onclick="openLb(6)">
+      <img src="https://picsum.photos/seed/isco07/600/1200" alt="Lifestyle 07" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Lifestyle</div><div class="gi-ov-title">Street Story</div></div>
+    </div>
+
+    <!-- SLOT 08 -->
+    <div class="gi fu" data-cat="photography" data-idx="7" onclick="openLb(7)">
+      <img src="https://picsum.photos/seed/isco08/600/600" alt="Photography 08" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Photography</div><div class="gi-ov-title">Editorial Frame</div></div>
+    </div>
+
+    <!-- SLOT 09 -->
+    <div class="gi fu" data-cat="events" data-idx="8" onclick="openLb(8)">
+      <img src="https://picsum.photos/seed/isco09/600/600" alt="Events 09" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Events</div><div class="gi-ov-title">Live Moment</div></div>
+    </div>
+
+    <!-- SLOT 10 — wide -->
+    <div class="gi wide fu" data-cat="branding" data-idx="9" onclick="openLb(9)">
+      <img src="https://picsum.photos/seed/isco10/1200/600" alt="Branding 10" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Branding</div><div class="gi-ov-title">Brand Shoot</div></div>
+    </div>
+
+    <!-- SLOT 11 -->
+    <div class="gi fu" data-cat="photography" data-idx="10" onclick="openLb(10)">
+      <img src="https://picsum.photos/seed/isco11/600/600" alt="Photography 11" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Photography</div><div class="gi-ov-title">Fine Art</div></div>
+    </div>
+
+    <!-- SLOT 12 -->
+    <div class="gi fu" data-cat="lifestyle" data-idx="11" onclick="openLb(11)">
+      <img src="https://picsum.photos/seed/isco12/600/600" alt="Lifestyle 12" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Lifestyle</div><div class="gi-ov-title">Candid Culture</div></div>
+    </div>
+
+    <!-- SLOT 13 — big -->
+    <div class="gi big fu" data-cat="events" data-idx="12" onclick="openLb(12)">
+      <img src="https://picsum.photos/seed/isco13/900/900" alt="Events 13" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Events</div><div class="gi-ov-title">Event Highlight</div></div>
+    </div>
+
+    <!-- SLOT 14 -->
+    <div class="gi fu" data-cat="photography" data-idx="13" onclick="openLb(13)">
+      <img src="https://picsum.photos/seed/isco14/600/600" alt="Photography 14" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Photography</div><div class="gi-ov-title">Light & Shadow</div></div>
+    </div>
+
+    <!-- SLOT 15 -->
+    <div class="gi fu" data-cat="branding" data-idx="14" onclick="openLb(14)">
+      <img src="https://picsum.photos/seed/isco15/600/600" alt="Branding 15" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Branding</div><div class="gi-ov-title">Identity Work</div></div>
+    </div>
+
+    <!-- SLOT 16 — wide -->
+    <div class="gi wide fu" data-cat="lifestyle" data-idx="15" onclick="openLb(15)">
+      <img src="https://picsum.photos/seed/isco16/1200/600" alt="Lifestyle 16" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Lifestyle</div><div class="gi-ov-title">Culture Capture</div></div>
+    </div>
+
+    <!-- SLOT 17 -->
+    <div class="gi fu" data-cat="photography" data-idx="16" onclick="openLb(16)">
+      <img src="https://picsum.photos/seed/isco17/600/600" alt="Photography 17" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Photography</div><div class="gi-ov-title">Creative Shot</div></div>
+    </div>
+
+    <!-- SLOT 18 -->
+    <div class="gi fu" data-cat="events" data-idx="17" onclick="openLb(17)">
+      <img src="https://picsum.photos/seed/isco18/600/600" alt="Events 18" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Events</div><div class="gi-ov-title">Stage Energy</div></div>
+    </div>
+
+    <!-- SLOT 19 -->
+    <div class="gi fu" data-cat="branding" data-idx="18" onclick="openLb(18)">
+      <img src="https://picsum.photos/seed/isco19/600/600" alt="Branding 19" loading="lazy"/>
+      <div class="gi-ov"><div class="gi-ov-cat">Branding</div><div class="gi-ov-title">Promo Shot</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button id="lb-x" onclick="closeLb()">✕ Close</button>
+  <button id="lb-p" onclick="lbNav(-1)">←</button>
+  <img id="lb-img" src="" alt="Gallery"/>
+  <button id="lb-n" onclick="lbNav(1)">→</button>
+  <div id="lb-info"></div>
+</div>
+
+<!-- ═══════════ EXPERIENCE ═══════════ -->
+<section id="experience" class="sec">
+  <div class="exp-intro-grid">
+    <div>
+      <div class="sec-label">Experience</div>
+      <h2 class="sec-h">Building brands<br>across <em>industries.</em></h2>
+    </div>
+    <p class="exp-sub">From energy services to fintech, eSports to web agencies — a track record of leading creative strategy, growing digital presence, and delivering measurable brand impact.</p>
+  </div>
+
+  <div class="tl">
+
+    <div class="tli fu">
+      <div class="tdate">2025 — Present<div class="tcur">Current</div></div>
+      <div>
+        <div class="trole">UI/UX Designer</div>
+        <div class="tco"><a href="https://lubech.tech/#home" target="_blank">Lubech · Web & Mobile App Agency</a></div>
+        <p class="tdesc">Designing user interfaces and experiences for web and mobile products. Translating briefs into intuitive, polished UI flows — wireframes and prototypes to production-ready designs — in Figma and Adobe XD. Collaborating with developers across React, Next.js, and React Native projects.</p>
+        <div class="ttags"><span class="ttag">UI Design</span><span class="ttag">UX Flows</span><span class="ttag">Figma</span><span class="ttag">Web</span><span class="ttag">Mobile</span><span class="ttag">React / Next.js</span></div>
+      </div>
+    </div>
+
+    <div class="tli fu">
+      <div class="tdate">2025 — Present<div class="tcur">Current</div></div>
+      <div>
+        <div class="trole">Creative Marketing Director</div>
+        <div class="tco">Navantis Systems · Hybrid</div>
+        <p class="tdesc">Leading comprehensive digital marketing for Navantis Systems and Remo Energy Services. Managing multi-channel presence — social media, websites, email, and paid campaigns — creating all content including graphics, video, and photography while optimizing for lead generation.</p>
+        <div class="ttags"><span class="ttag">Digital Strategy</span><span class="ttag">Paid Ads</span><span class="ttag">Analytics</span><span class="ttag">Content</span><span class="ttag">Branding</span></div>
+      </div>
+    </div>
+
+    <div class="tli fu">
+      <div class="tdate">2025 — Present<div class="tcur">Current</div></div>
+      <div>
+        <div class="trole">Creative Designer</div>
+        <div class="tco">Twyna Consults Ltd · Remote</div>
+        <p class="tdesc">Shaping how an engineering consultancy communicates expertise and project outcomes. Developing visual identity, designing corporate materials — proposals, bids, tender docs — and converting technical concepts into infographics, diagrams, and motion graphics.</p>
+        <div class="ttags"><span class="ttag">Visual Identity</span><span class="ttag">Infographics</span><span class="ttag">Motion</span><span class="ttag">Technical Comms</span></div>
+      </div>
+    </div>
+
+    <div class="tli fu">
+      <div class="tdate">2024 — Present<div class="tcur">Current</div></div>
+      <div>
+        <div class="trole">Creative Director, Head of Marketing & UI Designer</div>
+        <div class="tco">Wire 24 · Remote — Fintech</div>
+        <p class="tdesc">Developed and executed brand and digital marketing for a fintech company. Managed ad campaigns, designed creative assets, led cross-functional teams, and designed user interfaces to enhance engagement and drive conversions.</p>
+        <div class="ttags"><span class="ttag">Fintech</span><span class="ttag">UI Design</span><span class="ttag">Brand Strategy</span><span class="ttag">Figma</span></div>
+      </div>
+    </div>
+
+    <div class="tli fu">
+      <div class="tdate">2023 — 2024</div>
+      <div>
+        <div class="trole">Creative Director & Operations Manager</div>
+        <div class="tco">Gogolo eSports</div>
+        <p class="tdesc">Spearheaded marketing and operational strategies for an eSports brand. End-to-end campaign management including influencer collaborations and sponsorships, visual identity supervision, and operations for event execution and revenue.</p>
+        <div class="ttags"><span class="ttag">eSports</span><span class="ttag">Influencer Marketing</span><span class="ttag">Operations</span><span class="ttag">Sponsorships</span></div>
+      </div>
+    </div>
+
+    <div class="tli fu">
+      <div class="tdate">2022 — 2023</div>
+      <div>
+        <div class="trole">Head of Marketing, Creative Director & Photographer</div>
+        <div class="tco">Optsol Consulting · TUJ Advocates · LTN Cafe</div>
+        <p class="tdesc">Directed marketing strategies across multiple businesses — executing brand campaigns, social media initiatives, and advertising while producing high-quality photography, graphics, and promotional materials.</p>
+        <div class="ttags"><span class="ttag">Multi-brand</span><span class="ttag">Photography</span><span class="ttag">Brand Campaigns</span></div>
+      </div>
+    </div>
+
+    <div class="tli fu">
+      <div class="tdate">2021 — 2022</div>
+      <div>
+        <div class="trole">Marketing Director & In-house Photographer</div>
+        <div class="tco">Emages Studios</div>
+        <p class="tdesc">Designed and implemented branding strategies, managed in-house photography for client campaigns, developed graphic designs for digital and print media, and strengthened acquisition through social media strategies.</p>
+        <div class="ttags"><span class="ttag">Photography</span><span class="ttag">Graphic Design</span><span class="ttag">Social Media</span></div>
+      </div>
+    </div>
+
+    <div class="tli fu">
+      <div class="tdate">2019 — 2020</div>
+      <div>
+        <div class="trole">Head of Marketing & Photographer</div>
+        <div class="tco">Leone Art Media</div>
+        <p class="tdesc">Led brand awareness through digital marketing campaigns, conducted professional photography sessions, designed promotional materials, and executed content strategies to attract and retain customers.</p>
+        <div class="ttags"><span class="ttag">Brand Awareness</span><span class="ttag">Photography</span><span class="ttag">Content Strategy</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section id="services" class="sec">
+  <div class="svc-intro">
+    <div>
+      <div class="sec-label">What I Do</div>
+      <h2 class="sec-h">Full-spectrum<br><em>creative power.</em></h2>
+    </div>
+    <p class="svc-note">From high-level brand strategy to pixel-perfect design execution and data-driven campaign optimization — I do it all, end-to-end.</p>
+  </div>
+  <div class="svc-grid fu">
+    <div class="svc-card"><div class="svc-n">01</div><span class="svc-ico">◈</span><div class="svc-name">Brand Strategy & Development</div><p class="svc-desc">Visual systems, positioning, messaging, and tone of voice — built from the ground up with intention and longevity.</p></div>
+    <div class="svc-card"><div class="svc-n">02</div><span class="svc-ico">◈</span><div class="svc-name">Digital Marketing & Performance Ads</div><p class="svc-desc">Data-driven campaigns across social, search, and display — optimized relentlessly for conversions and measurable growth.</p></div>
+    <div class="svc-card"><div class="svc-n">03</div><span class="svc-ico">◈</span><div class="svc-name">Creative Direction</div><p class="svc-desc">Leading creative vision from concept to execution — every asset on-brand, cohesive, and high-impact.</p></div>
+    <div class="svc-card"><div class="svc-n">04</div><span class="svc-ico">◈</span><div class="svc-name">UI/UX & Web Design</div><p class="svc-desc">Intuitive, beautiful digital interfaces and web experiences in Figma and Adobe XD that convert and delight users.</p></div>
+    <div class="svc-card"><div class="svc-n">05</div><span class="svc-ico">◈</span><div class="svc-name">Photography & Videography</div><p class="svc-desc">Professional product, corporate, and event photography and video that elevates brand storytelling to its full potential.</p></div>
+    <div class="svc-card"><div class="svc-n">06</div><span class="svc-ico">◈</span><div class="svc-name">Graphic Design & Motion</div><p class="svc-desc">Print-ready and digital design — brochures, proposals, social assets, motion graphics, animations, infographics.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════ CONNECT ═══════════ -->
+<section id="connect" class="sec">
+  <div class="connect-bg">ISCO</div>
+  <div class="connect-inner fu">
+    <div class="sec-label" style="justify-content:center">Get In Touch</div>
+    <h2 class="connect-big">
+      Let's build<em>something great.</em>
+    </h2>
+    <p class="connect-sub">Open to new projects, collabs, and creative challenges.<br>Based in Kampala — available globally.</p>
+    <div class="soc-row">
+      <a href="https://www.instagram.com/________isco__/" target="_blank" class="soc">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a href="https://github.com/iscorockie" target="_blank" class="soc">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/isco-ronald-247865222/" target="_blank" class="soc">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://lubech.tech/#home" target="_blank" class="soc">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        Lubech.tech
+      </a>
+      <a href="mailto:iiscorockie@gmail.com" class="soc">
+        <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+        Email Me
+      </a>
+    </div>
+    <div class="contact-line">
+      <a href="tel:+256780844098">+256 780 844 098</a>
+      <span>·</span>
+      <a href="mailto:iiscorockie@gmail.com">iiscorockie@gmail.com</a>
+      <span>·</span>
+      <span>Ntinda, Kampala · Uganda</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">ISCO<em>.</em></div>
+  <div class="fcopy">© 2025 Ronald Isiko · All rights reserved</div>
+  <div class="floc">Kampala, Uganda</div>
+</footer>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur');
+const cd=cur.querySelector('.cd'),cr=cur.querySelector('.cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function tick(){
+  cd.style.left=mx+'px';cd.style.top=my+'px';
+  rx+=(mx-rx)*.13;ry+=(my-ry)*.13;
+  cr.style.left=rx+'px';cr.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+
+// Nav
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('on',scrollY>60));
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:.08});
+document.querySelectorAll('.fu').forEach((el,i)=>{
+  el.style.transitionDelay=(i%5*.08)+'s';
+  obs.observe(el);
+});
+
+// Gallery filter
+function filterGal(cat,btn){
+  document.querySelectorAll('.gf').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gi').forEach(item=>{
+    item.style.display=(cat==='all'||item.dataset.cat===cat)?'':'none';
+  });
+}
+
+// Lightbox
+let lbIdx=0;
+function visItems(){ return [...document.querySelectorAll('.gi')].filter(i=>i.style.display!=='none'); }
+function openLb(idx){
+  const all=[...document.querySelectorAll('.gi')];
+  lbIdx=all.findIndex(i=>+i.dataset.idx===idx);
+  renderLb();
+}
+function renderLb(){
+  const items=visItems();
+  if(!items.length)return;
+  lbIdx=(lbIdx+items.length)%items.length;
+  const img=items[lbIdx].querySelector('img');
+  const lbImg=document.getElementById('lb-img');
+  if(img){lbImg.src=img.src;lbImg.style.display='block';}
+  document.getElementById('lb-info').textContent=(lbIdx+1)+' / '+items.length;
+  document.getElementById('lb').classList.add('open');
+}
+function closeLb(){document.getElementById('lb').classList.remove('open');}
+function lbNav(d){lbIdx+=d;renderLb();}
+document.getElementById('lb').addEventListener('click',e=>{if(e.target===document.getElementById('lb'))closeLb();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeLb();
+  if(e.key==='ArrowLeft')lbNav(-1);
+  if(e.key==='ArrowRight')lbNav(1);
+});
+</script>
+</body>
+</html>
